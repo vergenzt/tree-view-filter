@@ -91,14 +91,13 @@ module.exports = TreeViewFilter =
                     p = p + '*'
                 p
         
-        fileEntries = @tree.treeView?.element?.querySelectorAll '.file.entry.list-item'
-        if fileEntries?
-            for fileEntry in fileEntries
-
-                span = fileEntry.querySelector 'span.name'
-                fileName = span.getAttribute 'data-name'     
-                if fileName?           
-                    fileEntry.style.display = @isFileNameFiltered(fileName) and 'none' or 'inherit'
+        entries = @tree.treeView?.element?.querySelectorAll '.entry'
+        if entries?
+            for entry in entries
+                entryNameSpan = entry.querySelector 'span.name'
+                entryPath = entryNameSpan.getAttribute 'data-path'
+                if entryPath?
+                    entry.style.display = @isFileNameFiltered(entryPath) and 'none' or 'inherit'
 
         @showClearButton patterns.length > 0
 
